@@ -4,15 +4,15 @@ namespace crosspay;
 
 interface ChargeInterface
 {
-    public function create();
+    public function create($params = null, $options = null);
 
-    public function retrieve();
+    public function retrieve($id, $options = null);
 
-    public function update();
+    public function update($id, $params = null, $options = null);
 
-    public function capture();
+    public function capture($params = null, $options = null);
 
-    public function all();
+    public function all($params = null, $options = null);
 
-    public function refund();
+    public function refund($params = null, $options = null);
 }
