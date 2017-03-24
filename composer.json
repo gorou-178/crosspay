@@ -1,5 +1,5 @@
 {
-    "name": "gorou178/crosspay",
+    "name": "crosspay",
     "type": "library",
     "require": {
         "php": "^7.0",
