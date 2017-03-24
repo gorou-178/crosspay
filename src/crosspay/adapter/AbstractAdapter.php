@@ -2,9 +2,10 @@
 
 namespace crosspay\adapter;
 
-use crosspay\AbstractBuilder;
+use crosspay\AdapterInterface;
+use crosspay\PaymentInterface;
 
-abstract class AbstractAdapter extends AbstractBuilder
+abstract class AbstractAdapter implements AdapterInterface, PaymentInterface
 {
-    
+
 }

@@ -3,23 +3,22 @@
 namespace crosspay;
 
 use crosspay\adapter\AbstractAdapter;
-use crosspay\adapter\Payment;
 
-class CrossPay implements CrossPayInterface
+class CrossPay
 {
     use ConfigTrait;
 
-    /** @var Payment */
-    private $payment;
+    /** @var AbstractAdapter */
+    private $adapter;
 
     public function __construct(AbstractAdapter $adapter, $config)
     {
+        $this->adapter = $adapter;
         $this->setConfig($config);
-        $this->payment = $adapter->createPayment($config);
     }
 
-    public function payment()
+    public function getAdapter()
     {
-        return $this->payment;
+        return $this->adapter;
     }
 }

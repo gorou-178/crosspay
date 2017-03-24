@@ -2,10 +2,17 @@
 
 namespace crosspay;
 
-class PaymentRequest
+class PaymentResponse implements PaymentResponseInterface
 {
-    public function __construct($re)
+    protected $response;
+
+    public function __construct($response)
     {
-        
+        $this->response = $response;
+    }
+
+    public function getRawResponse()
+    {
+        return $this->response;
     }
 }
