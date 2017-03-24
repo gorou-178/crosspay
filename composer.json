@@ -18,12 +18,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "gorou178\\crosspay\\": "src/crosspay"
+            "crosspay\\": "src/crosspay"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "gorou178\\crosspay\\Tests\\": "tests"
+            "crosspay\\Tests\\": "tests"
         }
     }
 }
