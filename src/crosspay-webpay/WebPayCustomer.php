@@ -3,13 +3,22 @@
 namespace crosspay;
 
 use crosspay\adapter\AbstractCustomer;
+use WebPay\WebPay;
 
 class WebPayCustomer extends AbstractCustomer
 {
+    /** @var WebPay */
+    protected $webPay;
+
+    public function __construct($webPay, $config)
+    {
+        $this->webPay = $webPay;
+        $this->setConfig($config);
+    }
 
     public function create()
     {
-        // TODO: Implement create() method.
+
     }
 
     public function update()

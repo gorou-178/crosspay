@@ -6,32 +6,41 @@ use crosspay\adapter\AbstractCharge;
 
 class WebPayCharge extends AbstractCharge
 {
-    public function create()
+    protected $webPay;
+    
+    public function __construct($webPay, $config)
     {
-        // TODO: Implement create() method.
+        $this->webPay = $webPay;
+        $this->setConfig($config);
     }
 
-    public function retrieve()
+    public function create($params = null, $options = null)
+    {
+        $result = $this->webPay->charge->create($params);
+        return new PaymentRequest($result);
+    }
+
+    public function retrieve($id, $options = null)
     {
         // TODO: Implement retrieve() method.
     }
 
-    public function update()
+    public function update($id, $params = null, $options = null)
     {
         // TODO: Implement update() method.
     }
 
-    public function capture()
+    public function capture($params = null, $options = null)
     {
         // TODO: Implement capture() method.
     }
 
-    public function all()
+    public function all($params = null, $options = null)
     {
         // TODO: Implement all() method.
     }
 
-    public function refund()
+    public function refund($params = null, $options = null)
     {
         // TODO: Implement refund() method.
     }

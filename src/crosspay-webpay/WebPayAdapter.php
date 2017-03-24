@@ -3,17 +3,49 @@
 namespace crosspay;
 
 use crosspay\adapter\AbstractAdapter;
-use crosspay\adapter\Payment;
 use WebPay\WebPay;
 
 class WebPayAdapter extends AbstractAdapter
 {
-    public function createPayment($config)
+    protected $webPay;
+    protected $customer;
+    protected $charge;
+    protected $subscription;
+
+    public function __construct(Config $config)
     {
-        $webPay = new WebPay($config->get('api_secret'));
-        $webPayCustomer = new WebPayCustomer($webPay, $config);
-        $webPayCharge = new WebPayCharge($webPay, $config);
-        $webPaySubscription = new WebPaySubscription($webPay, $config);
-        return new Payment($webPayCustomer, $webPayCharge, $webPaySubscription);
+        $this->webPay = new WebPay($config->get('api_secret'));
+        $this->customer = new WebPayCustomer($this->webPay, $config);
+        $this->charge = new WebPayCharge($this->webPay, $config);
+        $this->subscription = new WebPaySubscription($this->webPay, $config);
+    }
+
+    public function getProvider()
+    {
+        return $this->webPay;
+    }
+
+    /**
+     * @return CustomerInterface
+     */
+    public function customer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @return ChargeInterface
+     */
+    public function charge()
+    {
+        return $this->charge;
+    }
+
+    /**
+     * @return SubscriptionInterface
+     */
+    public function subscription()
+    {
+        return $this->subscription;
     }
 }
