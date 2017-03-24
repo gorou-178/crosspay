@@ -16,27 +16,27 @@ class WebPayCustomer extends AbstractCustomer
         $this->setConfig($config);
     }
 
-    public function create()
+    public function create($params = null, $options = null)
     {
-
+        // TODO: Implement create() method.
     }
 
-    public function update()
+    public function update($id, $params = null, $options = null)
     {
         // TODO: Implement update() method.
     }
 
-    public function delete()
+    public function delete($params = null, $options = null)
     {
         // TODO: Implement delete() method.
     }
 
-    public function retrieve()
+    public function retrieve($id, $options = null)
     {
         // TODO: Implement retrieve() method.
     }
 
-    public function all()
+    public function all($params = null, $options = null)
     {
         // TODO: Implement all() method.
     }

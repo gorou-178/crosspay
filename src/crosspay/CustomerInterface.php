@@ -1,6 +1,6 @@
 <?php
 
-namespace crosspay;
+namespace Crosspay;
 
 interface CustomerInterface
 {

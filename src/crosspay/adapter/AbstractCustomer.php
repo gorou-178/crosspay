@@ -1,9 +1,9 @@
 <?php
 
-namespace crosspay\adapter;
+namespace Crosspay\Adapter;
 
-use crosspay\ApiBase;
-use crosspay\CustomerInterface;
+use Crosspay\ApiBase;
+use Crosspay\CustomerInterface;
 
 abstract class AbstractCustomer extends ApiBase implements CustomerInterface
 {

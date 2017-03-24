@@ -1,13 +1,15 @@
 <?php
 
-namespace crosspay;
+namespace Crosspay;
 
-use crosspay\adapter\AbstractCharge;
+use Crosspay\Adapter\AbstractCharge;
+use WebPay\WebPay;
 
 class WebPayCharge extends AbstractCharge
 {
+    /** @var WebPay */
     protected $webPay;
-    
+
     public function __construct($webPay, $config)
     {
         $this->webPay = $webPay;
@@ -17,7 +19,7 @@ class WebPayCharge extends AbstractCharge
     public function create($params = null, $options = null)
     {
         $result = $this->webPay->charge->create($params);
-        return new PaymentRequest($result);
+        return new PaymentResponse($result);
     }
 
     public function retrieve($id, $options = null)

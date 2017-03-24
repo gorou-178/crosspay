@@ -1,8 +1,8 @@
 <?php
 
-namespace crosspay;
+namespace Crosspay;
 
-use crosspay\adapter\AbstractAdapter;
+use Crosspay\Adapter\AbstractAdapter;
 
 class CrossPay
 {

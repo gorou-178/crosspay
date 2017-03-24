@@ -1,10 +1,10 @@
 <?php
 
-namespace crosspay;
+namespace Crosspay;
 
 /**
  * Class ConfigTrait
- * @package crosspay
+ * @package Crosspay
  */
 trait ConfigTrait
 {

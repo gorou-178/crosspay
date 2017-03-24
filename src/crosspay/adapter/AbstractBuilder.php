@@ -1,6 +1,6 @@
 <?php
 
-namespace crosspay;
+namespace Crosspay;
 
 abstract class AbstractBuilder implements BuilderInterface
 {

@@ -1,36 +1,36 @@
 <?php
 
-namespace crosspay\adapter;
+namespace Crosspay\Adapter;
 
 class NullCharge extends AbstractCharge
 {
 
-    public function create()
+    public function create($params = null, $options = null)
     {
         return null;
     }
 
-    public function retrieve()
+    public function retrieve($id, $options = null)
     {
         return null;
     }
 
-    public function update()
+    public function update($id, $params = null, $options = null)
     {
         return null;
     }
 
-    public function capture()
+    public function capture($params = null, $options = null)
     {
         return null;
     }
 
-    public function all()
+    public function all($params = null, $options = null)
     {
         return null;
     }
 
-    public function refund()
+    public function refund($params = null, $options = null)
     {
         return null;
     }
