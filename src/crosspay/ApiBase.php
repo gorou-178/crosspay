@@ -1,22 +1,18 @@
 <?php
 
-namespace crosspay;
+namespace Crosspay;
 
 class ApiBase
 {
-    use ConfigTrait;
+    protected $config;
 
-    protected $provider;
-
-
-    public function __construct($provider, $config)
+    public function __construct(Config $config)
     {
-        $this->provider = $provider;
-        $this->setConfig($config);
+        $this->config = $config;
     }
-
-    public function getProvider()
+    
+    public function config() : Config
     {
-        return $this->provider;
+        return $this->config;
     }
 }

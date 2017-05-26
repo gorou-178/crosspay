@@ -1,10 +1,14 @@
 <?php
 
-namespace crosspay\adapter;
+namespace Crosspay\Adapter;
 
-use crosspay\AbstractBuilder;
+use Crosspay\AdapterInterface;
 
-abstract class AbstractAdapter extends AbstractBuilder
+/**
+ * Class AbstractAdapter
+ 
+ */
+abstract class AbstractAdapter implements AdapterInterface
 {
-    
+
 }

@@ -1,10 +1,14 @@
 <?php
 
-namespace crosspay\adapter;
+namespace Crosspay\Adapter;
 
-use crosspay\ApiBase;
-use crosspay\ChargeInterface;
+use Crosspay\ApiBase;
+use Crosspay\ChargeInterface;
 
+/**
+ * Class AbstractCharge
+ * @package Crosspay\Adapter
+ */
 abstract class AbstractCharge extends ApiBase implements ChargeInterface
 {
 

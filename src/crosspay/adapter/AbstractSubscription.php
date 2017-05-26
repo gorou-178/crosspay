@@ -1,10 +1,14 @@
 <?php
 
-namespace crosspay\adapter;
+namespace Crosspay\Adapter;
 
-use crosspay\ApiBase;
-use crosspay\SubscriptionInterface;
+use Crosspay\ApiBase;
+use Crosspay\SubscriptionInterface;
 
+/**
+ * Class AbstractSubscription
+ * @package Crosspay\Adapter
+ */
 abstract class AbstractSubscription extends ApiBase implements SubscriptionInterface
 {
 

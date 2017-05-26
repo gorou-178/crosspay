@@ -1,34 +1,35 @@
 <?php
 
-namespace Crosspay\Adapter;
+namespace Crosspay\Stripe;
 
+use Crosspay\Adapter\AbstractCustomer;
 use Crosspay\crosspay\response\Customer;
 
-class NullCustomer extends AbstractCustomer
+class StripeCustomer extends AbstractCustomer
 {
 
     public function create($params = null, $options = null) : Customer
     {
-        return null;
+        // TODO: Implement create() method.
     }
 
     public function save($id, $params = null, $options = null) : Customer
     {
-        return null;
+        // TODO: Implement save() method.
     }
 
     public function delete($params = null, $options = null) : bool
     {
-        return false;
+        // TODO: Implement delete() method.
     }
 
     public function retrieve($id, $options = null) : Customer
     {
-        return null;
+        // TODO: Implement retrieve() method.
     }
 
     public function all($params = null, $options = null) : array
     {
-        return null;
+        // TODO: Implement all() method.
     }
 }

@@ -1,16 +1,18 @@
 <?php
 
-namespace crosspay;
+namespace Crosspay;
+
+use Crosspay\crosspay\response\Subscription;
 
 interface SubscriptionInterface
 {
-    public function create();
+    public function create($params = null, $options = null) : Subscription;
 
-    public function update();
+    public function save($id, $params = null, $options = null) : Subscription;
 
-    public function retrieve();
+    public function retrieve($id, $params = null, $options = null) : Subscription;
 
-    public function cancel();
+    public function cancel($params = null, $options = null) : Subscription;
 
-    public function all();
+    public function all($params = null, $options = null) : array;
 }

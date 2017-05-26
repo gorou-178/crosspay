@@ -1,21 +1,59 @@
 <?php
 
-namespace crosspay;
+namespace Crosspay\Adapter;
 
-use crosspay\adapter\AbstractAdapter;
-use crosspay\adapter\NullCharge;
-use crosspay\adapter\NullCustomer;
-use crosspay\adapter\NullProvider;
-use crosspay\adapter\NullSubscription;
-use crosspay\adapter\Payment;
+use Crosspay\ChargeInterface;
+use Crosspay\Config;
+use Crosspay\crosspay\EventInterface;
+use Crosspay\CustomerInterface;
+use Crosspay\SubscriptionInterface;
 
+/**
+ * Class NullAdapter
+ * @package Crosspay\Adapter
+ */
 class NullAdapter extends AbstractAdapter
 {
+    /** @var Config config */
+    private $config;
 
-    function createPayment($config)
+    /**
+     * NullAdapter constructor.
+     */
+    public function __construct()
     {
-        $nullProvider = new NullProvider();
-        return new Payment(new NullCustomer($nullProvider, $config), new NullCharge($nullProvider, $config),
-            new NullSubscription($nullProvider, $config));
+        $this->config = new Config();
+    }
+
+    /**
+     * @return CustomerInterface
+     */
+    public function customer() : CustomerInterface
+    {
+        return new NullCustomer($this->config);
+    }
+
+    /**
+     * @return ChargeInterface
+     */
+    public function charge() : ChargeInterface
+    {
+        return new NullCharge($this->config);
+    }
+
+    /**
+     * @return SubscriptionInterface
+     */
+    public function subscription() : SubscriptionInterface
+    {
+        return new NullSubscription($this->config);
+    }
+
+    /**
+     * @return EventInterface
+     */
+    public function event() : EventInterface
+    {
+        return new NullEvent($this->config);
     }
 }

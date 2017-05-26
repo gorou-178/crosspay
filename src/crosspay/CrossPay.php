@@ -1,25 +1,61 @@
 <?php
 
-namespace crosspay;
+namespace Crosspay;
 
-use crosspay\adapter\AbstractAdapter;
-use crosspay\adapter\Payment;
-
-class CrossPay implements CrossPayInterface
+/**
+ * Class CrossPay
+ * @package Crosspay
+ * @method \Crosspay\CustomerInterface customer()
+ * @method \Crosspay\ChargeInterface charge()
+ * @method \Crosspay\SubscriptionInterface subscription()
+ * @method \Crosspay\EventInterface event()
+ */
+class CrossPay
 {
     use ConfigTrait;
 
-    /** @var Payment */
-    private $payment;
+    /** @var AdapterInterface */
+    protected $adapter;
 
-    public function __construct(AbstractAdapter $adapter, $config)
+    /**
+     * CrossPay constructor.
+     * @param array $config
+     */
+    public function __construct(array $config)
     {
         $this->setConfig($config);
-        $this->payment = $adapter->createPayment($config);
+        $this->buildAdapter();
     }
 
-    public function payment()
+    /**
+     * @return AdapterInterface
+     */
+    protected function buildAdapter()
     {
-        return $this->payment;
+        if (empty($this->getConfig()->get('provider'))) {
+            throw new \InvalidArgumentException('provider not found');
+        }
+        $adapterClass = ucfirst($this->getConfig()->get('provider')) . 'Adapter';
+        $this->adapter = new $adapterClass($this->getConfig());
+        return $this->adapter;
     }
+
+    /**
+     * @return AdapterInterface
+     */
+    public function adapter()
+    {
+        return $this->adapter;
+    }
+
+    /**
+     * @param $method
+     * @param $arguments
+     * @return mixed
+     */
+    public function __call($method, $arguments)
+    {
+        return $this->adapter()->$method(...$arguments);
+    }
+
 }

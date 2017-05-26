@@ -1,10 +1,10 @@
 <?php
 
-namespace crosspay;
+namespace Crosspay;
 
 /**
  * Class ConfigTrait
- * @package crosspay
+ * @package Crosspay
  */
 trait ConfigTrait
 {
@@ -30,7 +30,7 @@ trait ConfigTrait
     /**
      * @return Config
      */
-    protected function getConfig()
+    public function getConfig()
     {
         return $this->config;
     }
