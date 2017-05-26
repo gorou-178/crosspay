@@ -1,40 +1,41 @@
 <?php
 
-namespace Crosspay\Adapter;
+namespace Crosspay\Stripe;
 
+use Crosspay\Adapter\AbstractCharge;
 use Crosspay\crosspay\response\Charge;
 use Crosspay\crosspay\response\Refund;
 
-class NullCharge extends AbstractCharge
+class StripeCharge extends AbstractCharge
 {
 
     public function create($params = null, $options = null) : Charge
     {
-        return null;
+        // TODO: Implement create() method.
     }
 
     public function retrieve($id, $options = null) : Charge
     {
-        return null;
+        // TODO: Implement retrieve() method.
     }
 
     public function save($id, $params = null, $options = null) : Charge
     {
-        return null;
+        // TODO: Implement save() method.
     }
 
     public function capture($params = null, $options = null) : Charge
     {
-        return null;
+        // TODO: Implement capture() method.
     }
 
     public function all($params = null, $options = null) : array
     {
-        return null;
+        // TODO: Implement all() method.
     }
 
     public function refund($params = null, $options = null) : Refund
     {
-        return null;
+        // TODO: Implement refund() method.
     }
 }

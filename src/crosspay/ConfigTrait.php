@@ -30,7 +30,7 @@ trait ConfigTrait
     /**
      * @return Config
      */
-    protected function getConfig()
+    public function getConfig()
     {
         return $this->config;
     }

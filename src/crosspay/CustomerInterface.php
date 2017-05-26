@@ -2,15 +2,17 @@
 
 namespace Crosspay;
 
+use Crosspay\crosspay\response\Customer;
+
 interface CustomerInterface
 {
-    public function create($params = null, $options = null);
+    public function create($params = null, $options = null) : Customer;
 
-    public function update($id, $params = null, $options = null);
+    public function save($id, $params = null, $options = null) : Customer;
 
-    public function delete($params = null, $options = null);
+    public function delete($params = null, $options = null) : bool;
 
-    public function retrieve($id, $options = null);
+    public function retrieve($id, $options = null) : Customer;
 
-    public function all($params = null, $options = null);
+    public function all($params = null, $options = null) : array;
 }
