@@ -1,22 +1,20 @@
 <?php
 
-
 namespace Crosspay\crosspay\response;
 
-
-interface Charge
+abstract class Charge extends ResponseBase
 {
-    public function id() : string;
-    public function currency() : string;
-    public function description() : string;
-    public function amount() : int;
-    public function captured() : bool;
-    public function refunded() : bool;
-    public function amount_refunded() : int;
-    public function failure_code() : string;
-    public function failure_message() : string;
-    public function card() : Card;
-    public function customerId() : string;
-    public function subscriptionId() : string;
-    public function created() : int;
+    abstract public function id() : string;
+    abstract public function currency() : string;
+    abstract public function description() : string;
+    abstract public function amount() : int;
+    abstract public function captured() : bool;
+    abstract public function refunded() : bool;
+    abstract public function amount_refunded() : int;
+    abstract public function failure_code() : string;
+    abstract public function failure_message() : string;
+    abstract public function card() : Card;
+    abstract public function customerId() : string;
+    abstract public function subscriptionId() : string;
+    abstract public function created() : int;
 }

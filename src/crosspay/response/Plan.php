@@ -2,12 +2,12 @@
 
 namespace Crosspay\crosspay\response;
 
-interface Plan
+abstract class Plan extends ResponseBase
 {
-    public function id() : string;
-    public function name() : string;
-    public function amount() : int;
-    public function currency() : string;
-    public function interval() : string;
-    public function created() : int;
+    abstract public function id() : string;
+    abstract public function name() : string;
+    abstract public function amount() : int;
+    abstract public function currency() : string;
+    abstract public function interval() : string;
+    abstract public function created() : int;
 }

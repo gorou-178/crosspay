@@ -5,18 +5,21 @@ namespace Crosspay\Stripe;
 use Crosspay\Adapter\AbstractCharge;
 use Crosspay\crosspay\response\Charge;
 use Crosspay\crosspay\response\Refund;
+use Stripe\Stripe;
 
 class StripeCharge extends AbstractCharge
 {
 
     public function create($params = null, $options = null) : Charge
     {
-        // TODO: Implement create() method.
+        $response = \Stripe\Charge::create($params, $options);
+        return new StripeChargeResponse($response);
     }
 
     public function retrieve($id, $options = null) : Charge
     {
-        // TODO: Implement retrieve() method.
+        $response = \Stripe\Charge::retrieve($id, $options);
+        return new StripeChargeResponse($response);
     }
 
     public function save($id, $params = null, $options = null) : Charge

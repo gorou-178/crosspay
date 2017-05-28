@@ -2,11 +2,11 @@
 
 namespace Crosspay\crosspay\response;
 
-interface Customer
+abstract class Customer extends ResponseBase
 {
-    public function id() : string;
-    public function email() : string;
-    public function description() : string;
-    public function card() : Card;
-    public function created() : int;
+    abstract public function id() : string;
+    abstract public function email() : string;
+    abstract public function description() : string;
+    abstract public function card() : Card;
+    abstract public function created() : int;
 }
