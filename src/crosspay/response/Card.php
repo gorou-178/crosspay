@@ -2,15 +2,15 @@
 
 namespace Crosspay\crosspay\response;
 
-interface Card
+abstract class Card extends ResponseBase
 {
-    public function id() : string;
-    public function brand() : string;
-    public function name() : string;
-    public function last4() : string;
-    public function exp_year() : string;
-    public function exp_month() : string;
-    public function fingerprint() : string;
-    public function customerId() : string;
-    public function created() : int;
+    abstract public function id() : string;
+    abstract public function brand() : string;
+    abstract public function name() : string;
+    abstract public function last4() : string;
+    abstract public function exp_year() : string;
+    abstract public function exp_month() : string;
+    abstract public function fingerprint() : string;
+    abstract public function customerId() : string;
+    abstract public function created() : int;
 }

@@ -1,12 +1,11 @@
 <?php
 
-
 namespace Crosspay\crosspay\response;
 
-interface Event
+abstract class Event extends ResponseBase
 {
-    public function id() : string;
-    public function type() : string;
-    public function data() : string;
-    public function created() : int;
+    abstract public function id() : string;
+    abstract public function type() : string;
+    abstract public function data() : string;
+    abstract public function created() : int;
 }

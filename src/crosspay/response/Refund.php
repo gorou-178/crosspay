@@ -1,14 +1,12 @@
 <?php
 
-
 namespace Crosspay\crosspay\response;
 
-
-interface Refund
+abstract class Refund extends ResponseBase
 {
-    public function currency() : string;
-    public function amount() : int;
-    public function charge() : Charge;
-    public function reason() : string;
-    public function created() : int;
+    abstract public function currency() : string;
+    abstract public function amount() : int;
+    abstract public function charge() : Charge;
+    abstract public function reason() : string;
+    abstract public function created() : int;
 }
