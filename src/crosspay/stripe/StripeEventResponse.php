@@ -1,8 +1,8 @@
 <?php
 
-namespace Crosspay\stripe;
+namespace Crosspay\Stripe;
 
-use Crosspay\crosspay\response\Event;
+use Crosspay\response\Event;
 
 class StripeEventResponse extends Event
 {
@@ -25,5 +25,15 @@ class StripeEventResponse extends Event
     public function created() : int
     {
         return $this->response->created;
+    }
+
+    public function toArray() : array
+    {
+        return (array)$this->response;
+    }
+
+    public function toJson() : string
+    {
+        return json_encode($this->response);
     }
 }

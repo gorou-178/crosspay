@@ -3,6 +3,10 @@
 namespace Crosspay\Stripe;
 
 use Crosspay\Adapter\AbstractAdapter;
+use Crosspay\ChargeInterface;
+use Crosspay\CustomerInterface;
+use Crosspay\EventInterface;
+use Crosspay\SubscriptionInterface;
 use Stripe\Stripe;
 
 class StripeAdapter extends AbstractAdapter

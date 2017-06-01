@@ -1,10 +1,9 @@
 <?php
 
-namespace Crosppay\stripe;
+namespace Crosspay\Stripe;
 
-use Crosspay\crosspay\response\Card;
-use Crosspay\crosspay\response\Customer;
-use Crosspay\stripe\StripeCardResponse;
+use Crosspay\response\Card;
+use Crosspay\response\Customer;
 
 class StripeCustomerResponse extends Customer
 {
@@ -32,5 +31,15 @@ class StripeCustomerResponse extends Customer
     public function created() : int
     {
         return $this->response->created;
+    }
+
+    public function toArray() : array
+    {
+        return (array)$this->response;
+    }
+
+    public function toJson() : string
+    {
+        return json_encode($this->response);
     }
 }

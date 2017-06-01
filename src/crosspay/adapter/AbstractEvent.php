@@ -3,7 +3,7 @@
 namespace Crosspay\Adapter;
 
 use Crosspay\ApiBase;
-use Crosspay\crosspay\EventInterface;
+use Crosspay\EventInterface;
 
 /**
  * Class AbstractEvent

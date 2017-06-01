@@ -6,11 +6,15 @@ class ApiBase
 {
     protected $config;
 
-    public function __construct(Config $config)
+    public function __construct(Config $config = null)
     {
-        $this->config = $config;
+        if (is_null($config)) {
+            $this->config = Config::emptyConfig();
+        } else {
+            $this->config = $config;
+        }
     }
-    
+
     public function config() : Config
     {
         return $this->config;

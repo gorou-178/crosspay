@@ -1,5 +1,5 @@
 {
-    "name": "crosspay",
+    "name": "Crosspay",
     "type": "library",
     "require": {
         "php": "^7.0",
@@ -8,7 +8,8 @@
         "stripe/stripe-php": "^4.9"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.0"
+        "phpunit/phpunit": "^6.0",
+        "vlucas/phpdotenv": "^2.4"
     },
     "license": "MIT",
     "authors": [
@@ -19,12 +20,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "crosspay\\": "src/crosspay"
+            "Crosspay\\": "src/crosspay/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "crosspay\\Tests\\": "tests"
+            "Crosspay\\": "tests/"
         }
     }
 }

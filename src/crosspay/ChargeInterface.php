@@ -2,8 +2,8 @@
 
 namespace Crosspay;
 
-use Crosspay\crosspay\response\Charge;
-use Crosspay\crosspay\response\Refund;
+use Crosspay\response\Charge;
+use Crosspay\response\Refund;
 
 interface ChargeInterface
 {
@@ -11,11 +11,11 @@ interface ChargeInterface
 
     public function retrieve($id, $options = null) : Charge;
 
-    public function save($id, $params = null, $options = null) : Charge;
+    public function save(Charge $target, $params = null, $options = null) : Charge;
 
-    public function capture($params = null, $options = null) : Charge;
+    public function capture(Charge $target, $params = null, $options = null) : Charge;
 
     public function all($params = null, $options = null) : array;
 
-    public function refund($params = null, $options = null) : Refund;
+    public function refund(Charge $target, $params = null, $options = null) : Refund;
 }
