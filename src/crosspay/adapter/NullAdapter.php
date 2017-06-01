@@ -4,7 +4,7 @@ namespace Crosspay\Adapter;
 
 use Crosspay\ChargeInterface;
 use Crosspay\Config;
-use Crosspay\crosspay\EventInterface;
+use Crosspay\EventInterface;
 use Crosspay\CustomerInterface;
 use Crosspay\SubscriptionInterface;
 

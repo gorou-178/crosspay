@@ -2,10 +2,10 @@
 
 namespace Crosspay;
 
-use Crosspay\crosspay\response\Event;
+use Crosspay\response\Event;
 
 interface EventInterface
 {
-    public function retrieve($id, $params = null, $options = null) : Event;
+    public function retrieve($id, $options = null) : Event;
     public function all($params = null, $options = null) : array;
 }

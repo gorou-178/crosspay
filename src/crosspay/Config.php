@@ -6,6 +6,11 @@ class Config
 {
     protected $settings = [];
 
+    public static function emptyConfig()
+    {
+        return new Config();
+    }
+    
     public function __construct(array $settings = [])
     {
         $this->settings = $settings;

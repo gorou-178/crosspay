@@ -2,8 +2,8 @@
 
 namespace Crosspay\Adapter;
 
-use Crosspay\crosspay\response\Charge;
-use Crosspay\crosspay\response\Refund;
+use Crosspay\response\Charge;
+use Crosspay\response\Refund;
 
 class NullCharge extends AbstractCharge
 {

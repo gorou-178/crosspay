@@ -1,66 +1,40 @@
 <?php
 
+namespace Crosspay\Test;
+
+use Crosspay\CustomerInterface;
 use \PHPUnit\Framework\TestCase;
-use Crosspay\CrossPay;
+use \Crosspay\CrossPay;
+use \Dotenv\Dotenv;
 
 class CrossPayTest extends TestCase
 {
-    public function testPayment()
+
+    /** @var CrossPay $crossPay */
+    protected $crossPay;
+
+    protected function setUp()
     {
-        $crossPay = new CrossPay([
+        $dotEnv = new Dotenv(dirname(__FILE__) . '/../');
+        $dotEnv->load();
+
+        $this->crossPay = new CrossPay([
             'provider' => 'stripe',
-            'api_key' => 'xxxx',
-            'api_secret' => 'xxxx',
+            'api_key' => getenv('STRIPE_KEY'),
+            'api_secret' => getenv('STRIPE_SECRET'),
         ]);
-
-        // カスタマー作成
-        $customer = $crossPay->customer()->create([
-            'email' => 'hoge@example.com',
-            'token' => 'xxxx'
-        ]);
-        // メールアドレス取得
-        $email = $customer->email();
-        // カード下4桁取得
-        $cardLast4 = $customer->card()->last4();
-
-        // 定期課金作成
-        $subscription = $crossPay->subscription()->create([
-            'customer' => $customer->id(),
-            'plan' => 'hogehoge'
-        ]);
-
-        // 定期課金アイテム取得
-        $plan = $subscription->plan();
-
-        // アイテム名取得
-        $planName = $plan->name();
-
-        // 単発課金
-        $charge = $crossPay->charge()->create([
-            'amount' => 100,
-            'currency' => 'jpy',
-            'customer' => $customer->id()
-        ]);
-
-        // 失敗コード取得
-        $failureCode = $charge->failure_code();
-
-        // ユーザー検索
-        $customer = $crossPay->customer()->retrieve('cus_xxxx');
-
-        // 返金
-        $refund = $crossPay->charge()->refund([
-            'amount' => 50,
-            'reason' => 'hogehoge'
-        ]);
-
-        // 返金した日付
-        $refundTime = $refund->created();
-
-        // イベント取得
-        $event = $crossPay->event()->retrieve('event_xxxx');
-
-        // イベントタイプ取得
-        $type = $event->type();
     }
+
+    public function testGetConfig()
+    {
+        $config = $this->crossPay->getConfig();
+        $this->assertNotNull($config);
+    }
+
+    public function testCustomer()
+    {
+        $customerInterface = $this->crossPay->customer();
+        $this->assertInstanceOf(CustomerInterface::class, $customerInterface);
+    }
+
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Crosspay\crosspay\response;
+namespace Crosspay\response;
 
 abstract class Card extends ResponseBase
 {
@@ -13,4 +13,6 @@ abstract class Card extends ResponseBase
     abstract public function fingerprint() : string;
     abstract public function customerId() : string;
     abstract public function created() : int;
+    abstract public function toArray() : array;
+    abstract public function toJson() : string;
 }

@@ -2,8 +2,6 @@
 
 namespace Crosspay;
 
-use Crosspay\crosspay\EventInterface;
-
 interface AdapterInterface
 {
     public function customer() : CustomerInterface;

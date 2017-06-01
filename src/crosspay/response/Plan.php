@@ -1,6 +1,6 @@
 <?php
 
-namespace Crosspay\crosspay\response;
+namespace Crosspay\response;
 
 abstract class Plan extends ResponseBase
 {
@@ -10,4 +10,6 @@ abstract class Plan extends ResponseBase
     abstract public function currency() : string;
     abstract public function interval() : string;
     abstract public function created() : int;
+    abstract public function toArray() : array;
+    abstract public function toJson() : string;
 }

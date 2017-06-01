@@ -35,7 +35,8 @@ class CrossPay
         if (empty($this->getConfig()->get('provider'))) {
             throw new \InvalidArgumentException('provider not found');
         }
-        $adapterClass = ucfirst($this->getConfig()->get('provider')) . 'Adapter';
+        $provider = ucfirst($this->getConfig()->get('provider'));
+        $adapterClass = '\\Crosspay\\' . $provider . '\\' . $provider . 'Adapter';
         $this->adapter = new $adapterClass($this->getConfig());
         return $this->adapter;
     }

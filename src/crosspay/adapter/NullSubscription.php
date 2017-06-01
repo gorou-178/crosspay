@@ -2,7 +2,7 @@
 
 namespace Crosspay\Adapter;
 
-use Crosspay\crosspay\response\Subscription;
+use Crosspay\response\Subscription;
 
 class NullSubscription extends AbstractSubscription
 {
@@ -12,7 +12,7 @@ class NullSubscription extends AbstractSubscription
         return null;
     }
 
-    public function save($id, $params = null, $options = null) : Subscription
+    public function save(Subscription $target, $params = null, $options = null) : Subscription
     {
         return null;
     }
@@ -22,7 +22,7 @@ class NullSubscription extends AbstractSubscription
         return null;
     }
 
-    public function cancel($params = null, $options = null) : Subscription
+    public function cancel(Subscription $target, $params = null, $options = null) : Subscription
     {
         return null;
     }

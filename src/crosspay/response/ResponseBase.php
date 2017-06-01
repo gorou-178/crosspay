@@ -1,7 +1,6 @@
 <?php
 
-
-namespace Crosspay\crosspay\response;
+namespace Crosspay\response;
 
 class ResponseBase implements ResponseInterface
 {

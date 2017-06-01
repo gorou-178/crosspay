@@ -1,15 +1,15 @@
 <?php
 
-namespace Crosspay\crosspay\response;
+namespace Crosspay\response;
 
-interface Subscription
+abstract class Subscription extends ResponseBase
 {
-    public function id() : string;
-    public function description() : string;
-    public function start() : int;
-    public function customerId() : string;
-    public function created() : int;
-    public function plan() : Plan;
-    public function status() : string;
-    public function canceled_at() : int;
+    abstract public function id() : string;
+    abstract public function description() : string;
+    abstract public function start() : int;
+    abstract public function customerId() : string;
+    abstract public function created() : int;
+    abstract public function plan() : Plan;
+    abstract public function status() : string;
+    abstract public function canceled_at() : int;
 }

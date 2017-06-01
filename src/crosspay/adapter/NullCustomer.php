@@ -2,7 +2,7 @@
 
 namespace Crosspay\Adapter;
 
-use Crosspay\crosspay\response\Customer;
+use Crosspay\response\Customer;
 
 class NullCustomer extends AbstractCustomer
 {

@@ -2,7 +2,7 @@
 
 namespace Crosspay\Adapter;
 
-use Crosspay\crosspay\response\Event;
+use Crosspay\response\Event;
 
 class NullEvent extends AbstractEvent
 {
