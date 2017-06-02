@@ -1,22 +1,46 @@
 <?php
 
-class CardBrand
-{
-    const Visa = 'Visa';
-    const VisaDebit = 'Visa(debit)';
-    const Mastercard = 'Mastercard';
-    const MastercardDebit = 'Mastercard(debit)';
-    const MastercardPrepaid = 'Mastercard(prepaid)';
-    const AmericanExpress = 'American Express';
-    const Discover = 'Discover';
-    const DinersClub = 'Diners Club';
-    const JCB = 'JCB';
-}
+namespace Crosspay\Test;
 
 trait TestCard
 {
 
-    public function normalCardToken(CardBrand $brand)
+    public function normalCardNumber(CardBrand $brand)
+    {
+        $number = '';
+        switch ($brand) {
+            case CardBrand::Visa:
+                $number = '4242424242424242';
+                break;
+            case CardBrand::VisaDebit:
+                $number = '4000056655665556';
+                break;
+            case CardBrand::Mastercard:
+                $number = '5555555555554444';
+                break;
+            case CardBrand::MastercardDebit:
+                $number = '5200828282828210';
+                break;
+            case CardBrand::MastercardPrepaid:
+                $number = '5105105105105100';
+                break;
+            case CardBrand::AmericanExpress:
+                $number = '378282246310005';
+                break;
+            case CardBrand::Discover:
+                $number = '6011111111111117';
+                break;
+            case CardBrand::DinersClub:
+                $number = '30569309025904';
+                break;
+            case CardBrand::JCB:
+                $number = '3530111333300000';
+                break;
+        }
+        return $number;
+    }
+
+    public function normalCardStripeToken(CardBrand $brand)
     {
         $token = '';
         switch ($brand) {
@@ -49,14 +73,6 @@ trait TestCard
                 break;
         }
         return $token;
-    }
-
-    /**
-     * @return string
-     */
-    public function chargeCustomerFailToken()
-    {
-        return 'tok_chargeCustomerFail';
     }
 
 }

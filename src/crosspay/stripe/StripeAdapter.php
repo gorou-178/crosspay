@@ -18,7 +18,8 @@ class StripeAdapter extends AbstractAdapter
 
     public function __construct($config)
     {
-        Stripe::setApiKey($config->get('api_key'));
+        Stripe::setApiKey($config->get('api_secret'));
+        Stripe::setApiVersion($config->get('api_version'));
 
         $this->customer = new StripeCustomer($config);
         $this->charge = new StripeCharge($config);
