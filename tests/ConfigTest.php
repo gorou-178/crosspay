@@ -8,25 +8,31 @@ use Crosspay\Config;
 class ConfigTest extends TestCase
 {
 
-    public function testConfig()
+    private $config;
+
+    public function setUp()
     {
-        $config = new Config([
+        $this->config = new Config([
             'api_key' => '12345',
             'api_secret' => 'secret_12345'
         ]);
+    }
 
-        $this->assertEquals($config->get('api_key'), '12345');
-        $this->assertTrue($config->has('api_key'));
+    public function testGet()
+    {
+        $this->assertEquals($this->config->get('api_key'), '12345');
+        $this->assertEquals($this->config->get('dummy', 'default_value'), 'default_value');
+        $this->assertNull($this->config->get('dummy'));
+    }
 
-        $this->assertEquals($config->get('dummy', 'default_value'), 'default_value');
-        $this->assertFalse($config->has('dummy'));
-        $this->assertNull($config->get('dummy'));
+    public function testHas()
+    {
+        $this->assertTrue($this->config->has('api_key'));
+        $this->assertFalse($this->config->has('dummy'));
+    }
 
-        $this->assertFalse($config->has('api_version'));
-        $config->set('api_version', '1.0.0');
-        $this->assertTrue($config->has('api_version'));
-        $this->assertEquals($config->get('api_version'), '1.0.0');
-
+    public function testEmptyConfig()
+    {
         $emptyConfig = Config::emptyConfig();
         $this->assertFalse($emptyConfig->has('api_key'));
         $this->assertNull($emptyConfig->get('api_key'));

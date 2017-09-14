@@ -1,18 +1,20 @@
 <?php
 
-namespace Crosspay\Test\Stripe;
+namespace Crosspay\Test\Payjp;
 
 use Crosspay\CrossPay;
 use Crosspay\Test\CardBrand;
 use Crosspay\Test\TestCard;
 use Crosspay\Test\TestCase;
+use Payjp\Token;
 
-class StripeCustomerTest extends TestCase
+class PayjpCustomerTest extends TestCase
 {
     use TestCard;
 
     /** @var CrossPay */
     protected $crossPay;
+    protected $testCardToken;
 
     public static function setUpBeforeClass()
     {
@@ -22,10 +24,17 @@ class StripeCustomerTest extends TestCase
     protected function setUp()
     {
         $this->crossPay = new CrossPay([
-            'provider' => 'stripe',
-            'api_key' => getenv('STRIPE_KEY'),
-            'api_secret' => getenv('STRIPE_SECRET'),
-            'api_version' => getenv('STRIPE_API_VERSION')
+            'provider' => 'payjp',
+            'api_key' => getenv('PAYJP_KEY'),
+            'api_secret' => getenv('PAYJP_SECRET'),
+        ]);
+        $this->testCardToken = Token::create([
+            'card' => [
+                'number' => $this->normalCardNumber(CardBrand::Visa()),
+                'cvc' => '123',
+                'exp_month' => '1',
+                'exp_year' => '2020'
+            ]
         ]);
     }
 
@@ -38,8 +47,8 @@ class StripeCustomerTest extends TestCase
     {
         $email = 'test@example.com';
         $customer = $this->crossPay->customer()->create([
-            'email' => 'test@example.com',
-            'source' => $this->normalCardStripeToken(CardBrand::Visa()),
+            'email' => $email,
+            'card' => $this->testCardToken,
         ]);
 
         $this->assertNotNull($customer);
