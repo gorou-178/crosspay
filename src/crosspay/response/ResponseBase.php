@@ -6,7 +6,7 @@ class ResponseBase implements ResponseInterface
 {
     protected $response;
 
-    public function __construct($response)
+    public function __construct($response = '')
     {
         $this->response = $response;
     }

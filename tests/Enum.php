@@ -12,8 +12,8 @@ abstract class Enum
     public function __construct($value)
     {
         $ref = new ReflectionObject($this);
-        $consts = $ref->getConstants();
-        if (! in_array($value, $consts, true)) {
+        $constants = $ref->getConstants();
+        if (! in_array($value, $constants, true)) {
             throw new InvalidArgumentException;
         }
 

@@ -2,6 +2,7 @@
 
 namespace Crosspay\Stripe;
 
+use Crosspay\Adapter\NullCard;
 use Crosspay\response\Card;
 use Crosspay\response\Customer;
 
@@ -23,9 +24,26 @@ class StripeCustomerResponse extends Customer
         return $this->response->description;
     }
 
-    public function card() : Card
+    public function cards() : array
     {
-        return new StripeCardResponse($this->response->card);
+        $cards = $this->response->sources->data;
+        $result = [];
+        foreach ($cards as $card) {
+            $result[] = new StripeCardResponse($card);
+        }
+        return $result;
+    }
+
+    public function defaultCard() : Card
+    {
+        $hasMore = $cards = $this->response->sources->has_more;
+        $cards = $this->response->sources->data;
+        foreach ($cards as $card) {
+            if (!$hasMore || $card->id === $this->response->default_source) {
+                return new StripeCardResponse($card);
+            }
+        }
+        return new NullCard();
     }
 
     public function created() : int

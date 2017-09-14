@@ -92,7 +92,7 @@ class StripeCharge extends AbstractCharge
         try {
             $charge = \Stripe\Charge::retrieve($target->id());
             $newCharge = $charge->refund($params, $options);
-            return new StripeChargeResponse($newCharge);
+            return new StripeRefundResponse($newCharge);
         } catch (Exception $e) {
             throw new CrosspayException('charge refund exception from stripe', 0, $e);
         }

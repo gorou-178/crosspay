@@ -1,13 +1,13 @@
 <?php
 
-namespace Crosspay\Stripe;
+namespace Crosspay\Payjp;
 
 use Crosspay\exception\CrosspayException;
 use Crosspay\response\Charge;
 use Crosspay\response\Refund;
 use Exception;
 
-class StripeRefundResponse extends Refund
+class PayjpRefundResponse extends Refund
 {
 
     public function currency() : string
@@ -23,16 +23,16 @@ class StripeRefundResponse extends Refund
     public function charge() : Charge
     {
         try {
-            $charge = \Stripe\Charge::retrieve($this->response->charge);
-            return new StripeChargeResponse($charge);
+            $charge = \Payjp\Charge::retrieve($this->response->id);
+            return new PayjpChargeResponse($charge);
         } catch (Exception $e) {
-            throw new CrosspayException('refund charge exception from stripe', 0, $e);
+            throw new CrosspayException('refund charge exception from payjp', 0, $e);
         }
     }
 
     public function reason() : string
     {
-        return $this->response->reason;
+        return $this->response->refund_reason;
     }
 
     public function created() : int

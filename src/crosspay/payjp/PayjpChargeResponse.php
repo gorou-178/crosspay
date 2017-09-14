@@ -1,11 +1,11 @@
 <?php
 
-namespace Crosspay\Stripe;
+namespace Crosspay\Payjp;
 
 use Crosspay\response\Card;
 use Crosspay\response\Charge;
 
-class StripeChargeResponse extends Charge
+class PayjpChargeResponse extends Charge
 {
     public function id() : string
     {
@@ -54,7 +54,8 @@ class StripeChargeResponse extends Charge
 
     public function card() : Card
     {
-        return new StripeCardResponse($this->response->source);
+        $card = new PayjpCardResponse($this->response->card);
+        return $card;
     }
 
     public function customerId() : string
