@@ -6,7 +6,6 @@ use Crosspay\AdapterInterface;
 
 /**
  * Class AbstractAdapter
- 
  */
 abstract class AbstractAdapter implements AdapterInterface
 {
