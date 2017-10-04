@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Crosspay\Payjp;
 
 use Crosspay\Adapter\AbstractEvent;
