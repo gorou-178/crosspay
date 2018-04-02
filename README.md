@@ -8,12 +8,6 @@ Crosspay is an online payment API wrapper.
 - [PAY.JP](https://pay.jp/)
   - [GitHub - payjp/payjp-php](https://github.com/payjp/payjp-php)
 
-## Installation
-
-```bash
-$ composer require innovator-japan/crosspay
-```
-
 ## Usage
 ```php
 <?php
