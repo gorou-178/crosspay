@@ -2,6 +2,7 @@
 
 namespace Crosspay\Adapter;
 
+use Crosspay\response\Collection;
 use Crosspay\response\Event;
 
 class NullEvent extends AbstractEvent
@@ -11,7 +12,7 @@ class NullEvent extends AbstractEvent
         return null;
     }
 
-    public function all($params = null, $options = null) : array
+    public function all($params = null, $options = null) : Collection
     {
         return null;
     }

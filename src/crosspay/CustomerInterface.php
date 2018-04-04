@@ -2,6 +2,7 @@
 
 namespace Crosspay;
 
+use Crosspay\response\Collection;
 use Crosspay\response\Customer;
 
 interface CustomerInterface
@@ -14,5 +15,5 @@ interface CustomerInterface
 
     public function retrieve($id, $options = null) : Customer;
 
-    public function all($params = null, $options = null) : array;
+    public function all($params = null, $options = null) : Collection;
 }
