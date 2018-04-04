@@ -1,5 +1,6 @@
 {
-    "name": "Crosspay",
+    "name": "gurimmer/Crosspay",
+    "description": "Crosspay is an online payment API wrapper.",
     "type": "library",
     "require": {
         "php": "^7.0",
@@ -16,7 +17,7 @@
     "authors": [
         {
             "name": "gorou178",
-            "email": "s.anai@innovator.jp.net"
+            "email": "s.reianai@gmail.com"
         }
     ],
     "autoload": {
