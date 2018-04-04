@@ -3,6 +3,7 @@
 namespace Crosspay\Test\Stripe;
 
 use Crosspay\CrossPay;
+use Crosspay\response\Customer;
 use Crosspay\Test\CardBrand;
 use Crosspay\Test\TestCard;
 use Crosspay\Test\TestCase;
@@ -13,6 +14,9 @@ class StripeCustomerTest extends TestCase
 
     /** @var CrossPay */
     protected $crossPay;
+    protected $testCardToken;
+    /** @var Customer */
+    protected $customer;
 
     public static function setUpBeforeClass()
     {
@@ -27,52 +31,113 @@ class StripeCustomerTest extends TestCase
             'api_secret' => getenv('STRIPE_SECRET'),
             'api_version' => getenv('STRIPE_API_VERSION')
         ]);
+        $this->testCardToken = $this->normalCardStripeToken(CardBrand::Visa());
     }
 
     protected function tearDown()
     {
-
+        if ($this->customer) {
+            $this->crossPay->customer()->delete($this->customer);
+        }
     }
 
     public function testCreate()
     {
         $email = 'test@example.com';
-        $customer = $this->crossPay->customer()->create([
-            'email' => 'test@example.com',
-            'source' => $this->normalCardStripeToken(CardBrand::Visa()),
+        $description = 'crosspay test description';
+        $this->customer = $this->crossPay->customer()->create([
+            'email' => $email,
+            'card' => $this->testCardToken,
+            'description' => $description
         ]);
 
+        $this->assertNotNull($this->customer);
+        $this->assertNotNull($this->customer->id());
+        $this->assertNotNull($this->customer->created());
+        $this->assertNotNull($this->customer->cards());
+
+        $this->assertNotNull($this->customer->toArray());
+        $this->assertJson($this->customer->toJson());
+
+        $this->assertEquals($this->customer->email(), $email);
+        $this->assertEquals($this->customer->description(), $description);
+        $this->assertEquals($this->customer->defaultCard()->brand(), CardBrand::Visa);
+        $this->assertEquals($this->customer->defaultCard()->last4(), '4242');
+    }
+
+    public function testAll()
+    {
+        $description = 'crosspay test description';
+        $customer1 = $this->crossPay->customer()->create([
+            'email' => 'test1@example.com',
+            'card' => $this->testCardToken,
+            'description' => $description
+        ]);
+        $customer2 = $this->crossPay->customer()->create([
+            'email' => 'test2@example.com',
+            'card' => $this->testCardToken,
+            'description' => $description
+        ]);
+        $customer3 = $this->crossPay->customer()->create([
+            'email' => 'test3@example.com',
+            'card' => $this->testCardToken,
+            'description' => $description
+        ]);
+
+        $listLimit = 2;
+        $collection = $this->crossPay->customer()->all([
+            'limit' => $listLimit
+        ]);
+        $this->assertNotNull($collection);
+        $this->assertEquals($collection->count(), $listLimit);
+        $this->assertNotNull($collection->url());
+        $this->assertTrue($collection->hasMore());
+
+        $this->assertEquals($collection->data()[0]->id(), $customer1->id());
+        $this->assertEquals($collection->data()[1]->id(), $customer2->id());
+    }
+
+    public function testRetrieve()
+    {
+        $email = 'test@example.com';
+        $this->customer = $this->crossPay->customer()->create([
+            'email' => $email,
+            'card' => $this->testCardToken,
+        ]);
+
+        $customer = $this->crossPay->customer()->retrieve($this->customer->id());
         $this->assertNotNull($customer);
-        $this->assertNotNull($customer->id());
-        $this->assertNotNull($customer->created());
+        $this->assertEquals($customer->id(), $this->customer->id());
+    }
 
-        $this->assertEquals($customer->email(), $email);
-        $this->assertEquals($customer->defaultCard()->brand(), CardBrand::Visa);
-        $this->assertEquals($customer->defaultCard()->last4(), '4242');
-
-        $amount = 1000;
-        $currency = 'jpy';
-        $chargeDescription = 'test charge';
-        $charge = $this->crossPay->charge()->create([
-            'customer' => $customer->id(),
-            'amount' => $amount,
-            'currency' => $currency,
-            'description' => $chargeDescription
+    public function testSave()
+    {
+        $email = 'test@example.com';
+        $this->customer = $this->crossPay->customer()->create([
+            'email' => $email,
+            'card' => $this->testCardToken,
         ]);
 
-        $this->assertNotNull($charge);
-        $this->assertNotNull($charge->id());
-        $this->assertNotNull($charge->created());
+        $newEmail = 'update@example.com';
+        $updateCustomer = $this->crossPay->customer()->save($this->customer, [
+            'email' => $newEmail
+        ]);
 
-        $this->assertEquals($charge->currency(), $currency);
-        $this->assertEquals($charge->amount(), $amount);
-        $this->assertEquals($charge->customerId(), $customer->id());
-        $this->assertEquals($charge->description(), $chargeDescription);
-        $this->assertEquals($charge->card()->brand(), CardBrand::Visa);
-        $this->assertEquals($charge->card()->last4(), '4242');
+        $this->assertNotNull($updateCustomer);
+        $this->assertEquals($updateCustomer->email(), $newEmail);
+    }
 
-        $this->assertTrue($charge->captured());
-        $this->assertFalse($charge->refunded());
+    public function testDelete()
+    {
+        $email = 'test@example.com';
+        $this->customer = $this->crossPay->customer()->create([
+            'email' => $email,
+            'card' => $this->testCardToken,
+        ]);
+
+        $deleteCustomer = $this->crossPay->customer()->delete($this->customer);
+        $this->assertNotNull($deleteCustomer);
+        $this->assertEquals($deleteCustomer->id(), $this->customer->id());
     }
 
 }
