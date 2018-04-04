@@ -3,6 +3,7 @@
 namespace Crosspay\Adapter;
 
 use Crosspay\response\Charge;
+use Crosspay\response\Collection;
 use Crosspay\response\Refund;
 
 class NullCharge extends AbstractCharge
@@ -28,7 +29,7 @@ class NullCharge extends AbstractCharge
         return null;
     }
 
-    public function all($params = null, $options = null): array
+    public function all($params = null, $options = null): Collection
     {
         return null;
     }

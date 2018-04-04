@@ -2,6 +2,7 @@
 
 namespace Crosspay;
 
+use Crosspay\response\Collection;
 use Crosspay\response\Subscription;
 
 interface SubscriptionInterface
@@ -14,5 +15,5 @@ interface SubscriptionInterface
 
     public function cancel(Subscription $target, $params = null, $options = null) : Subscription;
 
-    public function all($params = null, $options = null) : array;
+    public function all($params = null, $options = null) : Collection;
 }

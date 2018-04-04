@@ -4,6 +4,7 @@ namespace Crosspay\Stripe;
 
 use Crosspay\Adapter\AbstractSubscription;
 use Crosspay\exception\CrosspayException;
+use Crosspay\response\Collection;
 use Crosspay\response\Subscription;
 use Exception;
 
@@ -67,11 +68,11 @@ class StripeSubscription extends AbstractSubscription
         }
     }
 
-    public function all($params = null, $options = null) : array
+    public function all($params = null, $options = null) : Collection
     {
         try {
-            $subscription = \Stripe\Subscription::all($params, $options);
-            return new StripeSubscriptionResponse($subscription);
+            $subscriptions = \Stripe\Subscription::all($params, $options);
+            return new StripeCollectionResponse($subscriptions);
         } catch (Exception $e) {
             throw new CrosspayException('subscription all exception from stripe', 0, $e);
         }

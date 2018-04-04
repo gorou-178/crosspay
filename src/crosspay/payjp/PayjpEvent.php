@@ -4,6 +4,7 @@ namespace Crosspay\Payjp;
 
 use Crosspay\Adapter\AbstractEvent;
 use Crosspay\exception\CrosspayException;
+use Crosspay\response\Collection;
 use Crosspay\response\Event;
 use Exception;
 
@@ -20,18 +21,13 @@ class PayjpEvent extends AbstractEvent
         }
     }
 
-    public function all($params = null, $options = null): array
+    public function all($params = null, $options = null): Collection
     {
         try {
             $events = \Payjp\Event::all($params, $options);
+            return new PayjpCollectionResponse($events);
         } catch (Exception $e) {
             throw new CrosspayException('event all exception from payjp', 0, $e);
         }
-
-        $results = [];
-        foreach ($events as $event) {
-            $results[] = new PayjpEventResponse($event);
-        }
-        return $results;
     }
 }

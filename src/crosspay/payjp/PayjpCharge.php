@@ -5,6 +5,7 @@ namespace Crosspay\Payjp;
 use Crosspay\Adapter\AbstractCharge;
 use Crosspay\exception\CrosspayException;
 use Crosspay\response\Charge;
+use Crosspay\response\Collection;
 use Crosspay\response\Refund;
 use Exception;
 
@@ -68,19 +69,14 @@ class PayjpCharge extends AbstractCharge
         }
     }
 
-    public function all($params = null, $options = null): array
+    public function all($params = null, $options = null): Collection
     {
         try {
             $charges = \Payjp\Charge::all($params, $options);
+            return new PayjpCollectionResponse($charges);
         } catch (Exception $e) {
             throw new CrosspayException('charge all exception from payjp', 0, $e);
         }
-
-        $results = [];
-        foreach ($charges as $charge) {
-            $results[] = new PayjpChargeResponse($charge);
-        }
-        return $results;
     }
 
     public function refund(Charge $target, $params = null, $options = null): Refund
