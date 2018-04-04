@@ -4,6 +4,7 @@ namespace Crosspay\Payjp;
 
 use Crosspay\Adapter\AbstractCustomer;
 use Crosspay\exception\CrosspayException;
+use Crosspay\response\Collection;
 use Crosspay\response\Customer;
 use Exception;
 
@@ -67,18 +68,13 @@ class PayjpCustomer extends AbstractCustomer
         }
     }
 
-    public function all($params = null, $options = null): array
+    public function all($params = null, $options = null): Collection
     {
         try {
             $customers = \Payjp\Customer::all($params, $options);
+            return new PayjpCollectionResponse($customers);
         } catch (Exception $e) {
             throw new CrosspayException('customer all exception from payjp', 0, $e);
         }
-
-        $results = [];
-        foreach ($customers as $customer) {
-            $results[] = new PayjpCustomerResponse($customer);
-        }
-        return $results;
     }
 }
