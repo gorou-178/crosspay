@@ -4,6 +4,7 @@ namespace Crosspay\Stripe;
 
 use Crosspay\Adapter\AbstractEvent;
 use Crosspay\exception\CrosspayException;
+use Crosspay\response\Collection;
 use Crosspay\response\Event;
 use Exception;
 
@@ -20,11 +21,11 @@ class StripeEvent extends AbstractEvent
         }
     }
 
-    public function all($params = null, $options = null) : array
+    public function all($params = null, $options = null) : Collection
     {
         try {
-            $event = \Stripe\Event::all($params, $options);
-            return new StripeEventResponse($event);
+            $events = \Stripe\Event::all($params, $options);
+            return new StripeCollectionResponse($events);
         } catch (Exception $e) {
             throw new CrosspayException('event all exception from stripe', 0, $e);
         }

@@ -4,6 +4,7 @@ namespace Crosspay\Stripe;
 
 use Crosspay\Adapter\AbstractCustomer;
 use Crosspay\exception\CrosspayException;
+use Crosspay\response\Collection;
 use Crosspay\response\Customer;
 use Exception;
 
@@ -67,18 +68,13 @@ class StripeCustomer extends AbstractCustomer
         }
     }
 
-    public function all($params = null, $options = null) : array
+    public function all($params = null, $options = null) : Collection
     {
         try {
             $customers = \Stripe\Customer::all($params, $options);
+            return new StripeCollectionResponse($customers);
         } catch (Exception $e) {
             throw new CrosspayException('customer all exception from stripe', 0, $e);
         }
-
-        $results = [];
-        foreach ($customers as $customer) {
-            $results[] = new StripeCustomerResponse($customer);
-        }
-        return $results;
     }
 }

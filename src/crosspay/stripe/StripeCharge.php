@@ -5,6 +5,7 @@ namespace Crosspay\Stripe;
 use Crosspay\Adapter\AbstractCharge;
 use Crosspay\exception\CrosspayException;
 use Crosspay\response\Charge;
+use Crosspay\response\Collection;
 use Crosspay\response\Refund;
 use Exception;
 
@@ -68,19 +69,14 @@ class StripeCharge extends AbstractCharge
         }
     }
 
-    public function all($params = null, $options = null) : array
+    public function all($params = null, $options = null) : Collection
     {
         try {
             $charges = \Stripe\Charge::all($params, $options);
+            return new StripeCollectionResponse($charges);
         } catch (Exception $e) {
             throw new CrosspayException('charge all exception from stripe', 0, $e);
         }
-
-        $results = [];
-        foreach ($charges as $charge) {
-            $results[] = new StripeChargeResponse($charge);
-        }
-        return $results;
     }
 
     public function refund(Charge $target, $params = null, $options = null) : Refund
