@@ -1,14 +1,15 @@
 <?php
 
-namespace Crosspay\Test\Stripe;
+namespace Crosspay\Test\Payjp;
 
 use Crosspay\CrossPay;
 use Crosspay\response\Customer;
 use Crosspay\Test\CardBrand;
 use Crosspay\Test\TestCard;
 use Crosspay\Test\TestCase;
+use Payjp\Token;
 
-class StripeCustomerTest extends TestCase
+class PayjpChargeTest extends TestCase
 {
     use TestCard;
 
@@ -23,15 +24,26 @@ class StripeCustomerTest extends TestCase
         self::authorizeFromEnv();
     }
 
+    public static function tearDownAfterClass()
+    {
+
+    }
+
     protected function setUp()
     {
         $this->crossPay = new CrossPay([
-            'provider' => 'stripe',
-            'api_key' => getenv('STRIPE_KEY'),
-            'api_secret' => getenv('STRIPE_SECRET'),
-            'api_version' => getenv('STRIPE_API_VERSION')
+            'provider' => 'payjp',
+            'api_key' => getenv('PAYJP_KEY'),
+            'api_secret' => getenv('PAYJP_SECRET'),
         ]);
-        $this->testCardToken = $this->normalCardStripeToken(CardBrand::Visa());
+        $this->testCardToken = Token::create([
+            'card' => [
+                'number' => $this->normalCardNumber(CardBrand::Visa()),
+                'cvc' => '123',
+                'exp_month' => '1',
+                'exp_year' => '2020'
+            ]
+        ]);
     }
 
     protected function tearDown()
@@ -55,6 +67,7 @@ class StripeCustomerTest extends TestCase
         $this->assertNotNull($this->customer->id());
         $this->assertNotNull($this->customer->created());
         $this->assertNotNull($this->customer->cards());
+
 
         $this->assertNotNull($this->customer->toArray());
         $this->assertJson($this->customer->toJson());
